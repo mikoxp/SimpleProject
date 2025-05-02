@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-1
+      author: moles
+      comment: create company
+      changes:
+        - createTable:
+            tableName: company
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

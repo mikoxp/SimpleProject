@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: data-1
+      author: moles
+      changes:
+        - sqlFile:
+            endDelimiter: \nGO
+            splitStatements: true
+            path: db/changelog/sql/insertCompany.sql
+            stripComments: true
