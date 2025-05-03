@@ -30,25 +30,26 @@ public class CompanyService {
     }
 
     /**
-     *
      * @return all company
      */
-    public List<CompanyDto> getAll(){
+    public List<CompanyDto> getAll() {
         return simpleMapping(companyRepository.findAll());
     }
 
     /**
-     *
-     * @param name
+     * @param name name
      * @return company by name
      */
-    public List<CompanyDto> byName(@PathVariable(name = "name") String name){
-        QCompany company = QCompany.company;
+    public List<CompanyDto> byName(@PathVariable(name = "name") String name) {
+        QCompany company = new QCompany("main");
+        QCompany subcompany = new QCompany("sub");
         JPAQuery<Company> query = new JPAQuery<>(entityManager);
-        List<Company> fetch = query.select(company)
+        List<Company> fetch = query.
+                select(company)
                 .from(company)
-                .where(company.name.containsIgnoreCase(name))
-                .fetch();
+                .leftJoin(company.subCompany, subcompany)
+                .where(company.name.containsIgnoreCase(name)
+                        .or(subcompany.name.containsIgnoreCase(name))).fetch();
         return simpleMapping(fetch);
     }
 
