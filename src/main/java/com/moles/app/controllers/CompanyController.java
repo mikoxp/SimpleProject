@@ -22,9 +22,8 @@ public class CompanyController {
     private  final CompanyService companyService;
 
     @GetMapping("/all")
-    public List<Company> getAll(){
-        List<Company> all = companyRepository.findAll();
-        return all;
+    public List<CompanyDto> getAll(){
+        return companyService.getAll();
     }
 
     @GetMapping("by/name")

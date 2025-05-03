@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Data
@@ -17,5 +19,12 @@ public class Company {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private Company parentCompany;
+
+    @OneToMany(mappedBy="parentCompany")
+    private List<Company> subCompany;
 
 }

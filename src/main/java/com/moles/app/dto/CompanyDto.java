@@ -1,4 +1,6 @@
 package com.moles.app.dto;
 
-public record CompanyDto(String name) {
+import java.util.List;
+
+public record CompanyDto(String name, List<CompanyDto> subCompany) {
 }

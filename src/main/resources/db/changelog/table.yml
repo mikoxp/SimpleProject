@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-1
+      id: create-1
       author: moles
       comment: create company
       changes:
@@ -19,3 +19,22 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
+  - changeSet:
+      id: create-2
+      author: moles
+      comment: company add column parentId
+      changes:
+        - addColumn:
+            tableName: company
+            columns:
+              - column:
+                  name: parent_id
+                  type: int
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: company
+            baseColumnNames: parent_id
+            referencedTableName: company
+            referencedColumnNames: id
+            constraintName: fk_company_parent_id

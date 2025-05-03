@@ -25,7 +25,23 @@ public class CompanyService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private List<CompanyDto> simpleMapping(List<Company> fetch) {
+        return fetch.stream().map(companyMapper::toDto).collect(Collectors.toList());
+    }
 
+    /**
+     *
+     * @return all company
+     */
+    public List<CompanyDto> getAll(){
+        return simpleMapping(companyRepository.findAll());
+    }
+
+    /**
+     *
+     * @param name
+     * @return company by name
+     */
     public List<CompanyDto> byName(@PathVariable(name = "name") String name){
         QCompany company = QCompany.company;
         JPAQuery<Company> query = new JPAQuery<>(entityManager);
@@ -33,6 +49,8 @@ public class CompanyService {
                 .from(company)
                 .where(company.name.containsIgnoreCase(name))
                 .fetch();
-        return fetch.stream().map(companyMapper::toDto).collect(Collectors.toList());
+        return simpleMapping(fetch);
     }
+
+
 }

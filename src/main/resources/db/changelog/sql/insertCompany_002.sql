@@ -1,0 +1,2 @@
+INSERT INTO company (name,parent_id) VALUES ('Subcompany 1',(SELECT id FROM company c WHERE c.name='Company 1' LIMIT 1));
+INSERT INTO company (name,parent_id) VALUES ('Subcompany 2',(SELECT id FROM company c WHERE c.name='Company 1' LIMIT 1));
