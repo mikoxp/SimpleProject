@@ -1,5 +1,6 @@
 package com.moles.app.controllers;
 
+import com.moles.app.dto.CompanyDto;
 import com.moles.app.entity.Company;
 import com.moles.app.repository.CompanyRepository;
 import com.moles.app.service.CompanyService;
@@ -27,7 +28,7 @@ public class CompanyController {
     }
 
     @GetMapping("by/name")
-    public List<Company> byName(@RequestParam("name") String name){
+    public List<CompanyDto> byName(@RequestParam("name") String name){
         return companyService.byName(name);
     }
 }
