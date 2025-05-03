@@ -9,12 +9,14 @@ import com.querydsl.jpa.impl.JPAQuery;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CompanyService {
@@ -33,6 +35,7 @@ public class CompanyService {
      * @return all company
      */
     public List<CompanyDto> getAll() {
+        log.info("Get all company");
         return simpleMapping(companyRepository.findAll());
     }
 
@@ -41,6 +44,7 @@ public class CompanyService {
      * @return company by name
      */
     public List<CompanyDto> byName(@PathVariable(name = "name") String name) {
+        log.info("Get company by name {}",name);
         QCompany company = new QCompany("main");
         QCompany subcompany = new QCompany("sub");
         JPAQuery<Company> query = new JPAQuery<>(entityManager);
